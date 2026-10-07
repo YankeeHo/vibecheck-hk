@@ -1,14 +1,14 @@
 # This is the summary of project, please do not change this file unless human approval.
 
 📌 VibeCheck HK — 專案架構總結
-1. 專案定位與核心價值 (Value Proposition)
+## 1. 專案定位與核心價值 (Value Proposition)
 賽道主題：Theme 3: Smart Living, Culture & Belonging
 
 核心使命：用「生成式 AI + 遊戲化（Gamification）」解決香港 Gen-Z 對廣東話文化與非遺（ICH）的斷層問題。
 
 產品哲學：將老土的傳統諺語，轉譯為年輕人的「現代社交貨幣（Social Currency）」，實現 "Learn → Practice → Reward" 的閉環體驗。
 
-🔄 核心用戶旅程 (Core User Journey)
+## 🔄 核心用戶旅程 (Core User Journey)
 Stage 1: Learn — Meme 轉譯引擎 (Meme-Translation Engine)
 機制：將傳統諺語/歇後語與 Gen-Z 現代生活焦慮/迷因進行配對（Meme Matching）。
 
@@ -100,7 +100,7 @@ FIRE 運動 vs. 城寨安全感
 展示武館背景談現代「副業（Side Hustle）」；用囤柴談抗風險財務規劃；用「陰功」展現社區同理心。
 
 
-🛠️ 「VibeCheck HK」極簡新手技術棧
+## 🛠️ 「VibeCheck HK」極簡新手技術棧
 1. 前端（UI 介面與網頁）
 工具：Next.js 或 React（搭配 Tailwind CSS 畫介面）
 
@@ -131,7 +131,7 @@ AI 說話 (TTS)：Azure Speech Service
 
 做法：不要用 AI 畫圖！ 先用 CSS 做好一張漂亮的復古閃卡模板（SSR/SR/N），對話結束後把 Stage 2 計算出來的 Vibe Score 分數 填進這張模板裡，然後用 html2canvas 瞬間把這塊 HTML 轉成圖片，讓用戶一鍵下載或分享到社交平台！
 
-💡 Newbie 開發建議（給 Hackathon 階段）
+## 💡 Newbie 開發建議（給 Hackathon 階段）
 不需要複雜的後端資料庫：一開始連 Supabase 或 Firebase 都不需要，把用戶對話狀態留在瀏覽器（React State）即可。
 
 防踩坑金句：「文字用 GPT，聲音用 Azure，卡片用 HTML 轉圖片」，這樣組裝開發難度最低，而且現場 Demo 絕對順暢、不會出現 AI 生成卡住的窘境！
@@ -141,3 +141,8 @@ AI 說話 (TTS)：Azure Speech Service
 跨世代共鳴 (Intergenerational Synergy)：讓 Gen-Z 發現「原來 50 年前香港人的焦慮，跟今天我們面對的完全一樣」，消弭世代隔閡。
 
 負責任 AI 範例 (Responsible AI)：明確的 Rubric 評分規準 + Prompt FSM 圍欄，展示出高安全性、可控性與教育價值的 AI 應用。
+
+## Distribution of work
+YK : phase 2 and general UI
+Jerry : phase 1
+Andy : phase 3
