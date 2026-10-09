@@ -1,3 +1,4 @@
+// General types and contracts for the app
 export type Persona = "Uncle Cheong" | "Brother Sing" | "Auntie Sam";
 export type RewardTier = "N" | "SR" | "SSR";
 

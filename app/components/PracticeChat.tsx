@@ -1,4 +1,5 @@
 "use client";
+// stage 2: persona and coversation data
 
 import { useMemo, useState } from "react";
 
@@ -25,7 +26,7 @@ const personas: Persona[] = [
     id: "uncle-cheong",
     name: "Uncle Cheong",
     title: "霓虹燈牌師傅",
-    accent: "from-cyan-400 via-sky-400 to-indigo-500",
+    accent: "from-[#00F0FF] to-cyan-300",
     badge: "craftsman",
     intro: "慢工出細貨，做野要落手落腳，唔好急住搶晒成個夜市。",
     replies: [
@@ -38,7 +39,7 @@ const personas: Persona[] = [
     id: "brother-sing",
     name: "Brother Sing",
     title: "紅頭小巴司機",
-    accent: "from-fuchsia-400 via-violet-500 to-purple-600",
+    accent: "from-[#FF2E93] to-pink-400",
     badge: "streetwise",
     intro: "過咗海就係神仙，先講到你有幾掂。講到最後，結果先係王道。",
     replies: [
@@ -51,7 +52,7 @@ const personas: Persona[] = [
     id: "auntie-sam",
     name: "Auntie Sam",
     title: "涼茶舖老闆娘",
-    accent: "from-amber-300 via-orange-400 to-rose-500",
+    accent: "from-[#00F0FF] via-cyan-300 to-[#FF2E93]",
     badge: "community",
     intro: "食過下夜粥，先知點樣留住人情。要顧住自己，亦要顧住晒成個街。",
     replies: [
@@ -116,7 +117,7 @@ export function PracticeChat() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-      <aside className="rounded-[28px] border border-white/10 bg-slate-950/70 p-4 shadow-[0_0_30px_rgba(15,23,42,0.3)]">
+      <aside className="rounded-[28px] border border-white/10 bg-[#111117]/95 p-4 shadow-[0_0_30px_rgba(0,0,0,0.3)]">
         <p className="text-xs font-bold uppercase tracking-[0.32em] text-cyan-200">Persona</p>
 
         <div className="mt-4 space-y-3">
@@ -130,8 +131,8 @@ export function PracticeChat() {
                 onClick={() => setSelectedPersona(persona.id)}
                 className={`w-full rounded-2xl border p-3 text-left transition ${
                   isSelected
-                    ? "border-cyan-400/60 bg-cyan-500/10 shadow-[0_0_20px_rgba(34,211,238,0.18)]"
-                    : "border-white/10 bg-slate-900/60 hover:border-white/20"
+                    ? "border-cyan-400/60 bg-cyan-500/10 shadow-[0_0_20px_rgba(0,240,255,0.14)]"
+                    : "border-white/10 bg-[#191921] hover:border-white/20"
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -148,33 +149,33 @@ export function PracticeChat() {
           })}
         </div>
 
-        <div className="mt-5 rounded-2xl border border-violet-400/30 bg-violet-500/10 p-3 text-sm leading-6 text-violet-100">
+        <div className="mt-5 rounded-2xl border border-pink-400/30 bg-[#FF2E93]/10 p-3 text-sm leading-6 text-pink-100">
           {activePersona.intro}
         </div>
       </aside>
 
-      <section className="rounded-[30px] border border-white/10 bg-slate-950/70 p-4 shadow-[0_0_30px_rgba(168,85,247,0.08)] sm:p-6">
+      <section className="rounded-[30px] border border-white/10 bg-[#111117]/95 p-4 shadow-[0_0_30px_rgba(255,46,147,0.06)] sm:p-6">
         <div className="mb-4 flex items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-fuchsia-200">Active character</p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-pink-200">Active character</p>
             <h2 className="mt-2 text-2xl font-black tracking-[-0.05em] text-white">
               {activePersona.name}
             </h2>
           </div>
 
-          <div className={`rounded-full bg-gradient-to-r ${activePersona.accent} px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-slate-950`}>
+          <div className={`rounded-full bg-gradient-to-r ${activePersona.accent} px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[#0D0D12]`}>
             {activePersona.title}
           </div>
         </div>
 
-        <div className="flex h-[440px] flex-col gap-3 overflow-y-auto rounded-2xl border border-white/10 bg-slate-900/60 p-3 sm:p-4">
+        <div className="flex h-[440px] flex-col gap-3 overflow-y-auto rounded-2xl border border-white/10 bg-[#191921] p-3 sm:p-4">
           {messages.map((message) => (
             <div
               key={message.id}
               className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 shadow-sm ${
                 message.role === "user"
-                  ? "ml-auto bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950"
-                  : "bg-slate-800 text-slate-100"
+                  ? "ml-auto bg-gradient-to-r from-[#00F0FF] to-cyan-300 text-[#0D0D12]"
+                  : "bg-[#262630] text-slate-100"
               }`}
             >
               {message.text}
@@ -182,7 +183,7 @@ export function PracticeChat() {
           ))}
 
           {isSending && (
-            <div className="max-w-[85%] rounded-2xl bg-slate-800 px-4 py-3 text-sm text-slate-200">
+            <div className="max-w-[85%] rounded-2xl bg-[#262630] px-4 py-3 text-sm text-slate-200">
               {activePersona.name} 正在回覆……
             </div>
           )}
@@ -194,14 +195,14 @@ export function PracticeChat() {
             onChange={(event) => setDraft(event.target.value)}
             rows={3}
             placeholder="講返你最真實嘅煩惱……"
-            className="min-h-[90px] flex-1 resize-none rounded-2xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-cyan-400/60 focus:outline-none"
+            className="min-h-[90px] flex-1 resize-none rounded-2xl border border-white/10 bg-[#191921] px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:border-cyan-400/60 focus:outline-none"
           />
 
           <button
             type="button"
             onClick={handleSend}
             disabled={isSending || !draft.trim()}
-            className="self-end rounded-2xl bg-gradient-to-r from-fuchsia-500 via-violet-500 to-indigo-500 px-5 py-3 text-sm font-black uppercase tracking-[0.2em] text-white shadow-[0_0_20px_rgba(168,85,247,0.35)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+            className="self-end rounded-2xl bg-gradient-to-r from-[#FF2E93] to-[#00F0FF] px-5 py-3 text-sm font-black uppercase tracking-[0.2em] text-[#0D0D12] shadow-[0_0_20px_rgba(255,46,147,0.28)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Send
           </button>
