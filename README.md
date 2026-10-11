@@ -11,61 +11,8 @@
 
 VibeCheck HK uses generative AI and game mechanics to connect Hong Kong Gen-Z with Cantonese sayings and intangible cultural heritage. The intended journey is to learn through meme translations, practice with historical-character conversations, and earn shareable culture-passport cards.
 
-## Ownership
-
-| Owner | Files and areas to handle |
-| --- | --- |
-| YK | Existing: `YK_roadmap.md`, `app/page.tsx`, `app/layout.tsx`, `app/globals.css`. Planned: `app/practice/page.tsx`, `app/api/chat/route.ts`, `app/api/evaluate/route.ts`, `app/components/PersonaChat.tsx`, and `app/components/VibeScore.tsx`. Own the general UI and Stage 2 practice/API work. |
-
-| Jerry | Existing: `Jerry_roadmap.md`. Planned: `app/learn/page.tsx`, `app/data/proverbs.json`, and `public/audio/proverbs/01.mp3`, `public/audio/proverbs/02.mp3`, `public/audio/proverbs/03.mp3`, `public/audio/proverbs/04.mp3`, `public/audio/proverbs/05.mp3`, `public/audio/proverbs/06.mp3`, `public/audio/proverbs/07.mp3`, `public/audio/proverbs/08.mp3`, `public/audio/proverbs/09.mp3`, and `public/audio/proverbs/10.mp3`. Own Stage 1 learning content and audio. |
-
-| Andy | Existing: `Andy_roadmap.md`. Planned: `app/reward/page.tsx`, `app/components/PassportCard.tsx`, `app/components/DownloadCardButton.tsx`, and `app/reward/passport-card.css`. Own Stage 3 reward-card rendering and download flow. |
-
-| All three | Coordinate changes to shared project files: `package.json`, `package-lock.json`, `next.config.ts`, `tsconfig.json`, `eslint.config.mjs`, `postcss.config.mjs`, `.gitignore`, `techstack.md`, and `README.md`. The owner proposing a dependency change should coordinate it with the team. `summary.md` is approval-protected and must not be changed without human approval. |
-
-Paths marked Planned do not exist yet; create them when implementing the corresponding stage. Coordinate shared data contracts before integrating stage files, and involve the listed owner when changing their files.
-
-
-## Project Files
-
-### Application and assets
-
-| File or folder | Purpose |
-| --- | --- |
-| `app/page.tsx` | Home page route and main UI entry point. Currently contains the Next.js starter screen. |
-| `app/layout.tsx` | Root HTML layout, shared font setup, and page metadata. |
-| `app/globals.css` | Global styles and Tailwind CSS import. |
-| `public/favicon.ico` | Browser tab icon; currently a starter asset. |
-| `public/file.svg` | Starter file icon asset. |
-| `public/globe.svg` | Starter globe icon asset. |
-| `public/next.svg` | Next.js logo used by the starter page. |
-| `public/vercel.svg` | Vercel logo used by the starter page. |
-| `public/window.svg` | Starter window icon asset. |
-
-### Project configuration
-
-| File | Purpose |
-| --- | --- |
-| `package.json` | Project scripts and direct dependencies. |
-| `package-lock.json` | Exact npm dependency versions; keep in sync through npm commands. |
-| `next.config.ts` | Next.js configuration. |
-| `tsconfig.json` | TypeScript compiler settings and the `@/*` import alias. |
-| `eslint.config.mjs` | ESLint rules for Next.js and TypeScript. |
-| `postcss.config.mjs` | PostCSS plugin configuration for Tailwind CSS. |
-| `.gitignore` | Files and generated outputs Git should ignore, including dependencies, build output, and local environment files. |
-
-### Project notes and team guidance
-
-| File | Purpose |
-| --- | --- |
-| `summary.md` | Product concept, user journey, character and saying matrix, technical direction, and original phase assignments. Treat as approval-protected: do not edit without human approval. |
-| `techstack.md` | Intended place to document the team's chosen technologies and implementation details. Currently empty. |
-| `YK_roadmap.md` | YK's development roadmap for Stage 2 and general UI. |
-| `Jerry_roadmap.md` | Jerry's development roadmap for Stage 1. Currently empty. |
-| `Andy_roadmap.md` | Andy's development roadmap for Stage 3. Currently empty. |
-| `AGENTS.md` | Repository-specific instructions for AI coding agents, including the requirement to consult the installed Next.js documentation before changing code. |
-| `CLAUDE.md` | Points to `AGENTS.md` so the same project guidance is available to Claude. |
-| `README.md` | Project introduction, setup instructions, file guide, and ownership reference. |
+## File structure
+每個file我都有留comment，加油 ：）
 
 
 ## Technical Direction
@@ -79,4 +26,15 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Run `npm run lint` to check the code and `npm run build` to create a production build. The current `app/page.tsx` is still the default Next.js starter page; the product experience is planned work.
+Open [http://localhost:3000](http://localhost:3000). Run `npm run lint` to check the code and `npm run build` to create a production build. The app includes Learn, Practice, and Reward stages.
+
+## Stage 2 OpenRouter chat
+
+Stage 2 sends chat messages to OpenRouter through the server-side `/api/chat` route. The API key is read only on the server and must never use a `NEXT_PUBLIC_` variable.
+
+1. Copy `.env.example` to `.env.local`.
+2. Replace `OPENROUTER_API_KEY` with your key from OpenRouter. Keep `.env.local` private and do not commit it.
+3. Set `OPENROUTER_MODEL` if you want to use a different model; it defaults to `deepseek/deepseek-v4.1-flash`.
+4. Restart `npm run dev` after changing environment variables.
+
+The route validates the selected character and conversation, then applies that character's instructions server-side before streaming a response from OpenRouter. The browser receives only the completed character reply, never the API key.

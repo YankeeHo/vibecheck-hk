@@ -34,6 +34,16 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+.practice-screen {
+  background-color: #080b0c;
+  background-image:
+    linear-gradient(180deg, rgba(5, 8, 10, 0.45), rgba(5, 8, 10, 0.26) 38%, rgba(5, 8, 10, 0.62)),
+    url("/stage2_sceneB.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .home-screen {
   position: relative;
   display: grid;
