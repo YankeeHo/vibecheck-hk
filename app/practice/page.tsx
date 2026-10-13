@@ -5,8 +5,8 @@ import { StageNavigator } from "../components/StageNavigator";
 export default function PracticePage() {
   return (
     <main className="practice-screen min-h-screen pb-24 text-white">
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-5 py-5 sm:px-8 sm:py-7 lg:px-10">
-        <header className="mb-6 flex items-center justify-between gap-4">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-5 py-5 sm:px-8 sm:py-7 lg:px-10">
+        <header className="relative z-10 mb-6 flex items-center justify-between gap-4">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-cyan-100/80">
               Kowloon · after dark
@@ -24,7 +24,7 @@ export default function PracticePage() {
           </Link>
         </header>
 
-        <div className="flex flex-1 items-center justify-center pb-8">
+        <div className="relative z-10 flex flex-1 items-center justify-center pb-8">
           <PracticeChat />
         </div>
       </div>

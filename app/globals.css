@@ -36,12 +36,6 @@ body {
 
 .practice-screen {
   background-color: #080b0c;
-  background-image:
-    linear-gradient(180deg, rgba(5, 8, 10, 0.45), rgba(5, 8, 10, 0.26) 38%, rgba(5, 8, 10, 0.62)),
-    url("/stage2_sceneB.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .home-screen {
@@ -51,10 +45,10 @@ body {
   place-items: end center;
   padding: 24px 20px max(32px, env(safe-area-inset-bottom));
   background-color: #090b15;
-  background-image: url("/homepage_background.jpg");
+  background-image: url("/image/stage2/homepage_bg.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 .home-start-button {
@@ -83,12 +77,6 @@ body {
 .home-start-button:focus-visible {
   outline: 3px solid #ffbd5c;
   outline-offset: 4px;
-}
-
-@media (orientation: landscape) {
-  .home-screen {
-    background-size: auto 100%;
-  }
 }
 
 pre {
