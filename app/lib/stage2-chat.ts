@@ -78,7 +78,7 @@ export function isStage2Evaluation(value: unknown): value is Stage2Evaluation {
     Number.isInteger(evaluation.vibe_score) &&
     evaluation.vibe_score >= 1 &&
     evaluation.vibe_score <= 5 &&
-    (evaluation.card_rarity === "SSR" || evaluation.card_rarity === "SR" || evaluation.card_rarity === "N") &&
+    (evaluation.card_rarity === "SR" || evaluation.card_rarity === "S" || evaluation.card_rarity === "R") &&
     typeof evaluation.evaluator_feedback === "string" &&
     typeof evaluation.unlocked_idiom === "string" &&
     typeof evaluation.phonetic_tone_tip === "string"

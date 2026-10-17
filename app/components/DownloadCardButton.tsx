@@ -24,11 +24,7 @@ export function DownloadCardButton({ cardId }: DownloadCardButtonProps) {
       const { default: html2canvas } = await import("html2canvas");
       const canvas = await html2canvas(card, {
         backgroundColor: null,
-        height: 520,
         scale: 2,
-        width: 360,
-        windowHeight: 520,
-        windowWidth: 360,
       });
       const anchor = document.createElement("a");
       anchor.download = "vibecheck-hk-reward-card.png";

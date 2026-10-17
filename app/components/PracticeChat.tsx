@@ -276,6 +276,7 @@ export function PracticeChat() {
       if (result.evaluation && activePersona) {
         const rewardResult: RewardCardData = {
           sessionId: globalThis.crypto.randomUUID(),
+          personaId: activePersona.id,
           persona: activePersona.name,
           vibeScore: result.evaluation.vibe_score,
           rarity: getRewardTier(result.evaluation.vibe_score),

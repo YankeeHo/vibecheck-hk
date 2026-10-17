@@ -1,12 +1,12 @@
 // General types and contracts for the app
 export type Persona = "Uncle Cheong" | "Brother Sing" | "Auntie Sam";
-export type RewardTier = "N" | "SR" | "SSR";
+export type RewardTier = "R" | "S" | "SR";
 
 export function getRewardTier(score: number): RewardTier {
-  if (!Number.isInteger(score) || score < 1 || score > 5) return "N";
-  if (score === 5) return "SSR";
-  if (score >= 3) return "SR";
-  return "N";
+  if (!Number.isInteger(score) || score < 1 || score > 5) return "R";
+  if (score === 5) return "SR";
+  if (score >= 3) return "S";
+  return "R";
 }
 
 export type ProverbInput = {

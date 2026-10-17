@@ -26,7 +26,7 @@ export type Stage2RoleplayPersona = {
 export type Stage2Evaluation = {
   status: "COMPLETED";
   vibe_score: number;
-  card_rarity: "SSR" | "SR" | "N";
+  card_rarity: "SR" | "S" | "R";
   evaluator_feedback: string;
   unlocked_idiom: string;
   phonetic_tone_tip: string;

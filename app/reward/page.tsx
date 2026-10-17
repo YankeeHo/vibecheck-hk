@@ -1,6 +1,5 @@
 import { StageNavigator } from "../components/StageNavigator";
 import { RewardStage } from "../components/RewardStage";
-import "./passport-card.css";
 
 export default function RewardPage() {
   return (

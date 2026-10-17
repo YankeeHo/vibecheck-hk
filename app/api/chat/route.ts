@@ -106,7 +106,7 @@ export async function POST(request: Request) {
     let evaluation: Stage2Evaluation | undefined;
     if (completed) {
       const idiomOptions = idioms.map(({ cantonese }) => cantonese).join("、");
-      const evaluatorPrompt = `Evaluate the user's full roleplay performance. Score semantic understanding (40%), authentic spoken Cantonese (30%), and creative connection to modern life (30%). Return only a JSON object with status="COMPLETED", vibe_score as an integer from 1 to 5, card_rarity (score 5=SSR, 3-4=SR, 1-2=N), evaluator_feedback as one short Cantonese phrase, unlocked_idiom exactly matching the idiom used in the roleplay and selected from this character's list [${idiomOptions}], and phonetic_tone_tip with a useful Cantonese tone or homophone tip connected to that idiom. Do not include markdown or extra keys.`;
+      const evaluatorPrompt = `Evaluate the user's full roleplay performance. Score semantic understanding (40%), authentic spoken Cantonese (30%), and creative connection to modern life (30%). Return only a JSON object with status="COMPLETED", vibe_score as an integer from 1 to 5, card_rarity (score 5=SR, 3-4=S, 1-2=R), evaluator_feedback as one short Cantonese phrase, unlocked_idiom exactly matching the idiom used in the roleplay and selected from this character's list [${idiomOptions}], and phonetic_tone_tip with a useful Cantonese tone or homophone tip connected to that idiom. Do not include markdown or extra keys.`;
 
       try {
         const evaluationText = await streamText(
