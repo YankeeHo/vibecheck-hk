@@ -3,8 +3,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { SpeechRecognizer } from "microsoft-cognitiveservices-speech-sdk";
-import { stage2IdiomsByPersona, type Stage2PersonaId } from "../lib/contracts";
+import { getRewardTier, stage2IdiomsByPersona, type Stage2PersonaId } from "../lib/contracts";
+import { rewardResultStorageKey, type RewardCardData } from "../lib/reward";
 import {
   createStarterMessages,
   getMysteryProverb,
@@ -25,6 +27,7 @@ export function PracticeChat() {
   const [isSending, setIsSending] = useState(false);
   const [isSceneComplete, setIsSceneComplete] = useState(false);
   const [evaluation, setEvaluation] = useState<Stage2Evaluation | null>(null);
+  const [rewardSaveError, setRewardSaveError] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [voiceError, setVoiceError] = useState("");
   const [activeSpeechId, setActiveSpeechId] = useState<string | null>(null);
@@ -270,7 +273,26 @@ export function PracticeChat() {
       setMessages((previous) => [...previous, assistantMessage]);
       void handleCharacterSpeech(assistantMessage);
       if (result.completed) setIsSceneComplete(true);
-      if (result.evaluation) setEvaluation(result.evaluation);
+      if (result.evaluation && activePersona) {
+        const rewardResult: RewardCardData = {
+          sessionId: globalThis.crypto.randomUUID(),
+          persona: activePersona.name,
+          vibeScore: result.evaluation.vibe_score,
+          rarity: getRewardTier(result.evaluation.vibe_score),
+          feedback: result.evaluation.evaluator_feedback,
+          unlockedIdiom: result.evaluation.unlocked_idiom,
+          toneTip: result.evaluation.phonetic_tone_tip,
+        };
+
+        try {
+          sessionStorage.setItem(rewardResultStorageKey, JSON.stringify(rewardResult));
+          setRewardSaveError("");
+        } catch {
+          setRewardSaveError("Your result could not be saved for the reward card. Please allow session storage and try again.");
+        }
+
+        setEvaluation({ ...result.evaluation, card_rarity: rewardResult.rarity });
+      }
     } catch (error) {
       setSendError(
         error instanceof Error ? error.message : "The character could not reply. Please try again.",
@@ -493,7 +515,7 @@ export function PracticeChat() {
                 className="mr-auto max-w-[88%] border border-cyan-200/60 bg-black/55 px-4 py-3 text-sm font-bold leading-6 text-cyan-100 shadow-[0_0_14px_rgba(0,240,255,0.3)]"
                 role="status"
               >
-                好吧，看來你今天學到了很多。讓我們看看你的 'Vibe Score' 吧！
+                好吧，看來你今天學到了很多。讓我們看看你的 &apos;Vibe Score&apos; 吧！
               </p>
             )}
 
@@ -511,6 +533,15 @@ export function PracticeChat() {
                 </p>
               </aside>
             )}
+            {evaluation && !rewardSaveError && (
+              <Link
+                href="/reward"
+                className="mr-auto inline-flex min-h-11 items-center gap-2 border border-cyan-100 bg-cyan-100 px-4 text-xs font-black uppercase tracking-[0.12em] text-[#102128] transition hover:bg-white"
+              >
+                View your Vibe Pass <span aria-hidden="true">→</span>
+              </Link>
+            )}
+            {rewardSaveError && <p className="mr-auto text-xs text-rose-100" role="alert">{rewardSaveError}</p>}
             {isSceneComplete && !evaluation && (
               <p className="mr-auto text-xs text-white/70" role="status">
                 對話完成，評語暫時未能載入。

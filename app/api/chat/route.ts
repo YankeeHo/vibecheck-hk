@@ -1,6 +1,6 @@
 //OpenRouter request flow
 import { OpenRouter } from "@openrouter/sdk";
-import { stage2IdiomsByPersona, type Stage2PersonaId } from "../../lib/contracts";
+import { getRewardTier, stage2IdiomsByPersona, type Stage2PersonaId } from "../../lib/contracts";
 import {
   buildStage2Prompt,
   getAssistantTurn,
@@ -127,7 +127,7 @@ export async function POST(request: Request) {
         if (isStage2Evaluation(parsed) && idioms.some((idiom) => idiom.cantonese === parsed.unlocked_idiom)) {
           evaluation = {
             ...parsed,
-            card_rarity: parsed.vibe_score === 5 ? "SSR" : parsed.vibe_score >= 3 ? "SR" : "N",
+            card_rarity: getRewardTier(parsed.vibe_score),
           };
         }
       } catch (error) {
