@@ -35,17 +35,13 @@ export function StageNavigator({ currentStage }: StageNavigatorProps) {
           ← Previous
         </span>
       )}
-      {nextStage ? (
+      {nextStage && (
         <Link
           href={nextStage.href}
           className="rounded-full bg-cyan-300 px-3 py-2 text-xs font-bold text-[#0D0D12] transition hover:bg-cyan-200"
         >
           Next →
         </Link>
-      ) : (
-        <span aria-disabled="true" className="rounded-full border border-white/10 px-3 py-2 text-xs font-bold text-white/35">
-          Next →
-        </span>
       )}
     </nav>
   );

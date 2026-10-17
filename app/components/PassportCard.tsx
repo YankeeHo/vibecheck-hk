@@ -11,7 +11,7 @@ export function PassportCard({ result }: PassportCardProps) {
     <figure
       id="passport-card"
       className="relative aspect-[3/4] w-full max-w-sm overflow-hidden shadow-[0_18px_38px_rgba(0,0,0,0.4)]"
-      aria-label={`${result.rarity} reward card for ${result.persona}`}
+      aria-label={`Reward card featuring ${result.persona}`}
     >
       <Image
         src={getRewardCardImage(result.personaId, result.rarity)}
@@ -20,12 +20,15 @@ export function PassportCard({ result }: PassportCardProps) {
         sizes="(max-width: 420px) calc(100vw - 40px), 384px"
         className="object-contain"
       />
-      <span
-        aria-hidden="true"
-        className="absolute right-[5%] top-[5%] z-10 grid aspect-square w-[22%] place-items-center border-2 border-[#f2d17b] bg-[#101214]/95 font-serif text-lg font-bold text-[#fff0bd] shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
-      >
-        {result.rarity}
-      </span>
+      {result.feedback && (
+        <figcaption
+          lang="yue"
+          className="absolute inset-x-[7%] bottom-[6%] z-10 border border-[#f2d17b] bg-[#101214]/90 px-3 py-2 text-center text-xs leading-relaxed text-[#fff0bd] shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
+        >
+          <span className="mr-1 font-bold">對話評語：</span>
+          {result.feedback}
+        </figcaption>
+      )}
     </figure>
   );
 }
