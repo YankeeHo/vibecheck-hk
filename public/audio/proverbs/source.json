@@ -1,0 +1,6 @@
+{
+  "provider": "macOS",
+  "voice": "Sinji",
+  "locale": "zh-HK",
+  "purpose": "Local hackathon demo; replace using Azure generator for the final Azure requirement."
+}

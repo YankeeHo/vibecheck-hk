@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PracticeChat } from "../components/PracticeChat";
+import Stage1Practice from "../learn/Stage1Practice";
 import { StageNavigator } from "../components/StageNavigator";
 // Practice page screen
 export default function PracticePage() {
@@ -24,7 +24,7 @@ export default function PracticePage() {
           </div>
         </header>
 
-        <PracticeChat />
+        <Stage1Practice />
       </div>
       <StageNavigator currentStage="Practice" />
     </main>

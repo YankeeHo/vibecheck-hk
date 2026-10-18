@@ -2,6 +2,7 @@
 // stage 2: persona and coversation data
 
 import { useMemo, useState } from "react";
+import type { ProverbInput } from "../lib/contracts";
 
 type PersonaId = "uncle-cheong" | "brother-sing" | "auntie-sam";
 
@@ -71,9 +72,14 @@ const starterMessages = [
   },
 ];
 
-export function PracticeChat() {
-  const [selectedPersona, setSelectedPersona] = useState<PersonaId>("uncle-cheong");
-  const [messages, setMessages] = useState<Message[]>(starterMessages);
+export function PracticeChat({ initialProverb }: { initialProverb?: ProverbInput } = {}) {
+  const initialPersona: PersonaId = initialProverb?.persona === "Brother Sing" ? "brother-sing"
+    : initialProverb?.persona === "Auntie Sam" ? "auntie-sam" : "uncle-cheong";
+  const [selectedPersona, setSelectedPersona] = useState<PersonaId>(initialPersona);
+  const [messages, setMessages] = useState<Message[]>(initialProverb ? [{
+    id: "stage1-intro", role: "assistant",
+    text: `你啱啱學咗「${initialProverb.title}」。${initialProverb.context} 試吓用呢句講一個你遇過嘅情境。`,
+  }] : starterMessages);
   const [draft, setDraft] = useState("");
   const [isSending, setIsSending] = useState(false);
 
